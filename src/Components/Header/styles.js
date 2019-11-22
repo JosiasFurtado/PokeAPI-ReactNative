@@ -8,7 +8,6 @@ export const Container = styled.View`
   align-items: center;
   margin: 0 15px 0 15px;
 
-  border-color: #999;
   border-bottom-width: 1px;
   border-bottom-color: #999;
 `;
@@ -24,9 +23,9 @@ export const Touchable = styled.TouchableOpacity`
 `;
 
 export const Title = styled.View`
+  margin-left: 15px;
   border-left-color: #999;
   border-left-width: 1px;
-  border-left-style: solid;
 `;
 
 export const TitleTxt = styled.Text`
