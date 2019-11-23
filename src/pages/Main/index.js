@@ -1,9 +1,18 @@
 import React, {Component} from 'react';
-import {View, Image, Text, FlatList, SafeAreaView} from 'react-native';
+import {TouchableOpacity, Text, SafeAreaView} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import api from '../../services/api';
 
-import {PokeCard, Page, PageNumber, PokeId, PokeImg, PokeName} from './styles';
+import {
+  PokeCard,
+  List,
+  Page,
+  PageNumber,
+  PokeId,
+  PokeImg,
+  PokeName,
+  Spinner,
+} from './styles';
 
 export default class Main extends Component {
   state = {
@@ -11,7 +20,7 @@ export default class Main extends Component {
     urlNext: '',
     urlPrev: '',
     pageNumber: 1,
-    loading: false,
+    loading: true,
   };
 
   async componentDidMount() {
@@ -55,13 +64,18 @@ export default class Main extends Component {
 
   renderPokeCard = item => {
     const {name, url} = item;
+    const {loading} = this.state;
     const pokemonIndex = url.split('/')[url.split('/').length - 2];
     const imageUrl = `https://github.com/PokeAPI/sprites/blob/master/sprites/pokemon/${pokemonIndex}.png?raw=true`;
 
     return (
       <PokeCard onPress={this.onPressPokeCard}>
         <PokeId>{pokemonIndex}</PokeId>
-        <PokeImg source={{uri: imageUrl}} />
+        {loading ? (
+          <PokeImg source={{uri: imageUrl}} />
+        ) : (
+          <Spinner loading={loading} name="spinner" color="#fff" size={25} />
+        )}
         <PokeName>{name}</PokeName>
       </PokeCard>
     );
@@ -72,10 +86,10 @@ export default class Main extends Component {
   };
 
   render() {
-    const {pokemons, loading, pageNumber} = this.state;
+    const {pokemons, pageNumber} = this.state;
     return (
       <SafeAreaView>
-        <FlatList
+        <List
           data={pokemons}
           numColumns={3}
           keyExtractor={item => String(item.name)}
@@ -83,21 +97,15 @@ export default class Main extends Component {
         />
 
         <Page>
-          <Icon
-            name="arrow-left"
-            color="#fff"
-            size={25}
-            onClick={this.backPage}
-          />
+          <TouchableOpacity onPress={this.backPage}>
+            <Icon name="arrow-left" color="#fff" size={25} />
+          </TouchableOpacity>
           <PageNumber>
             <Text>{pageNumber || 1}</Text>
           </PageNumber>
-          <Icon
-            name="arrow-right"
-            color="#fff"
-            size={25}
-            onClick={this.nextPage}
-          />
+          <TouchableOpacity onPress={this.nextPage}>
+            <Icon name="arrow-right" color="#fff" size={25} />
+          </TouchableOpacity>
         </Page>
       </SafeAreaView>
     );

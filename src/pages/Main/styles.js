@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export const PokeCard = styled.TouchableOpacity`
   flex: 1;
@@ -29,23 +30,34 @@ export const PokeId = styled.Text`
   margin-left: 5px;
 `;
 
+export const List = styled.FlatList`
+  margin-top: 5px;
+  max-height: 91%;
+`;
+
+export const Spinner = styled(Icon)`
+  align-self: center;
+  width: 30px;
+  height: 30px;
+  margin: 8px;
+`;
+
 export const Page = styled.View`
   flex: 2;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
-  margin: 10px;
+  margin: 20px;
+  padding: 5px;
 `;
 
 export const PageNumber = styled.View`
   justify-content: center;
   align-items: center;
   background-color: #fff;
-  color: #000;
-  font-size: 16px;
-  font-weight: bold;
   width: 25px;
   height: 25px;
   margin: 10px;
   padding: 5px;
+  border-radius: 15px;
 `;
