@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export const Container = styled.View`
   max-width: 100%;
@@ -10,6 +11,25 @@ export const Container = styled.View`
 
   border-bottom-width: 1px;
   border-bottom-color: #999;
+`;
+
+export const Search = styled.TextInput`
+  max-width: 40%;
+  width: 100%;
+  height: 35px;
+  position: absolute;
+  right: 5px;
+
+  background-color: #fff;
+  color: #111;
+
+  border-radius: 10px;
+  padding: 2px;
+`;
+
+export const IconSearch = styled(Icon)`
+  position: absolute;
+  right: 15px;
 `;
 
 export const Logo = styled.Image`

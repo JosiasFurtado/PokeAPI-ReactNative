@@ -13,6 +13,11 @@ export const PokeCard = styled.TouchableOpacity`
   justify-content: center;
 `;
 
+export const List = styled.FlatList`
+  margin-top: 5px;
+  max-height: 91%;
+`;
+
 export const PokeName = styled.Text`
   color: #fff;
   align-self: center;
@@ -28,11 +33,6 @@ export const PokeImg = styled.Image`
 export const PokeId = styled.Text`
   color: #fff;
   margin-left: 5px;
-`;
-
-export const List = styled.FlatList`
-  margin-top: 5px;
-  max-height: 91%;
 `;
 
 export const Spinner = styled(Icon)`

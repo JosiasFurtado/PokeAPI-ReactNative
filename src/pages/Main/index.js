@@ -26,8 +26,6 @@ export default class Main extends Component {
   async componentDidMount() {
     const response = await api.get('https://pokeapi.co/api/v2/pokemon/');
     const {next, previous, results} = response.data;
-    // const params = new URL(next).searchParams;
-    // const offset = params.get('offset');
     this.setState({
       urlNext: next,
       urlPrev: previous,
@@ -69,20 +67,26 @@ export default class Main extends Component {
     const imageUrl = `https://github.com/PokeAPI/sprites/blob/master/sprites/pokemon/${pokemonIndex}.png?raw=true`;
 
     return (
-      <PokeCard onPress={this.onPressPokeCard}>
+      <PokeCard onPress={() => this.onPressPokeCard(pokemonIndex)}>
         <PokeId>{pokemonIndex}</PokeId>
         {loading ? (
           <PokeImg source={{uri: imageUrl}} />
         ) : (
           <Spinner loading={loading} name="spinner" color="#fff" size={25} />
         )}
-        <PokeName>{name}</PokeName>
+        <PokeName>
+          {name
+            .toLowerCase()
+            .split(' ')
+            .map(s => s.charAt(0).toUpperCase() + s.substring(1))
+            .join(' ')}
+        </PokeName>
       </PokeCard>
     );
   };
 
-  onPressPokeCard = () => {
-    console.warn('Pressed');
+  onPressPokeCard = pokemonIndex => {
+    this.props.navigation.navigate('Pokemon', {id: pokemonIndex});
   };
 
   render() {
